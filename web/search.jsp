@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Search Customers</title>
-        <link rel="stylesheet" type="text/css" href="DbColorsCSS.css"/>
+        <link rel="stylesheet" type="text/css" href="DbColorsCSS2.css"/>
 
     </head>
     <body>
@@ -23,7 +23,7 @@
 
                 <h1>Search For...</h1>
 
-                <form name="searchForm" action="search" method="get">
+                <form name="searchForm" action="searchCustomers" method="get">
 
                     <input type="text" name="searchVal" value="" />
 

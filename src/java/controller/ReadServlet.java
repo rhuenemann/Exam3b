@@ -1,6 +1,7 @@
 
 package controller;
 
+
 import dbHelpers.ReadQuery;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Rossifer
  */
-@WebServlet(name = "Read", urlPatterns = {"/read"})
-public class Read extends HttpServlet {
+@WebServlet(name = "ReadServlet", urlPatterns = {"/read"})
+public class ReadServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

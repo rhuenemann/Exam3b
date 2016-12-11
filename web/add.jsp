@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add A New Customer</title>
-        <link rel="stylesheet" type="text/css" href="DbColorsCSS.css"/>
+        <link rel="stylesheet" type="text/css" href="DbColorsCSS2.css"/>
     </head>
     <body>
 
@@ -61,7 +61,7 @@
                         
                         <tr>
                             <td class="right">Email Address:</td>
-                            <td><input type="text" name="emalAddr" value=""/></td>
+                            <td><input type="text" name="emailAddr" value=""/></td>
                         </tr>
 
                         <tr>

@@ -7,7 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Update Customer Contact Info</title>
-        <link rel="stylesheet" type="text/css" href="DbColorsCSS.css"/>
+        <link rel="stylesheet" type="text/css" href="DbColorsCSS2.css"/>
     </head>
     <body>
 

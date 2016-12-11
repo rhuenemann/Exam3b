@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Customer Contacts</title>
+        <title>Admin</title>
         <link rel="stylesheet" type="text/css" href="DbColorsCSS2.css"/>
     </head>
     <body>
@@ -18,10 +18,11 @@
 
             <div class="main">
 
-                <h1>Customer Contact Details</h1>
+                <h1>Admin</h1>
 
-                <p><a href="admin.jsp">Administrator Link</a></p>
-
+                <p><a href="index.jsp">logout</a></p>
+                <p><a href="add">Add A Record</a></p>
+                <p><a href="readupdate">Update/Delete</a></p>
             </div>
 
             <!--footer-->

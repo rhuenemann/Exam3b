@@ -1,6 +1,6 @@
 package controller;
 
-import dbHelpers.UpdateQuery;
+import dbHelpers.UpdateQueryCUS;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -16,7 +16,7 @@ import model.Customers;
  * @author Rossifer
  */
 @WebServlet(name = "UpdateServlet", urlPatterns = {"/updateCustomer"})
-public class UpdateServlet extends HttpServlet {
+public class UpdateServletCustomers extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -70,9 +70,8 @@ public class UpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        // get the form data and set up a Xboxgame object
-        String firstName = request.getParameter("firstName");
+
+            String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
             String addr1 = request.getParameter("addr1");
             String addr2 = request.getParameter("addr2");
@@ -81,7 +80,6 @@ public class UpdateServlet extends HttpServlet {
             String zip = request.getParameter("zip");
             String emailAddr = request.getParameter("emailAddr");
             
-            //set up a customer object
             Customers customer = new Customers();
             customer.setFirstName(firstName);
             customer.setLastName(lastName);
@@ -91,12 +89,10 @@ public class UpdateServlet extends HttpServlet {
             customer.setState(state);
             customer.setZip(zip);
             customer.setEmailAddr(emailAddr);
+            
+        UpdateQueryCUS uqc = new UpdateQueryCUS();
+        uqc.doUpdate(customer);
         
-        //create an UpdateQuery object and use it to update the xboxgame
-        UpdateQuery uq = new UpdateQuery();
-        uq.doUpdate(customer);
-        
-        //pass control to the ReadServlet
         String url = "/read";
         
         RequestDispatcher dispatcher = request.getRequestDispatcher(url);

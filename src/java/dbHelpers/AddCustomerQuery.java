@@ -13,11 +13,12 @@ import java.util.logging.Logger;
 import model.Customers;
 
 
-public class UpdateQuery {
+
+public class AddCustomerQuery {
     
     private Connection conn;
     
-    public UpdateQuery(){
+    public AddCustomerQuery(){
         
         Properties props = new Properties();
         InputStream instr = getClass().getResourceAsStream("dbConn.properties");
@@ -25,12 +26,12 @@ public class UpdateQuery {
         try {
             props.load(instr);
         } catch (IOException ex) {
-            Logger.getLogger(UpdateQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddCustomerQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             instr.close();
         } catch (IOException ex) {
-            Logger.getLogger(UpdateQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddCustomerQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         String driver = props.getProperty("driver.name");
@@ -40,38 +41,41 @@ public class UpdateQuery {
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UpdateQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddCustomerQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             conn = DriverManager.getConnection(url, username, passwd);
         } catch (SQLException ex) {
-            Logger.getLogger(UpdateQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddCustomerQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
+
     
-    public void doUpdate(Customers xboxgame){
+    public void doAddCustomer (Customers customer){
         
         try {
-            String query = "UPDATE customers SET firstName = ?, lastName = ?, addr1 = ?, addr2 = ?, "
-                    + "city=?, state=?, zip=?, emailAddr=? WHERE custID = ?";
+            String query = "INSERT INTO customers (firstName, lastName, addr1, addr2, city, state, zip, emailAddr) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             
             PreparedStatement ps = conn.prepareStatement(query);
             
             
-            ps.setString(1, xboxgame.getFirstName());
-            ps.setString(2, xboxgame.getLastName());
-            ps.setString(3, xboxgame.getAddr1());
-            ps.setString(4, xboxgame.getAddr2());
-            ps.setString(5, xboxgame.getCity());
-            ps.setString(6, xboxgame.getState());
-            ps.setString(7, xboxgame.getZip());
-            ps.setString(8, xboxgame.getEmailAddr());
-            ps.setInt(9, xboxgame.getCustID());
+            ps.setString(1, customer.getFirstName());
+            ps.setString(2, customer.getLastName());
+            ps.setString(3, customer.getAddr1());
+            ps.setString(4, customer.getAddr2());
+            ps.setString(5, customer.getCity());
+            ps.setString(6, customer.getState());
+            ps.setString(7, customer.getZip());
+            ps.setString(8, customer.getEmailAddr());
+            
             
             ps.executeUpdate();
+            
         } catch (SQLException ex) {
-            Logger.getLogger(UpdateQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddCustomerQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
+        
     }
-    
 }

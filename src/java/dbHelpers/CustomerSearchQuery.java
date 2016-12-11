@@ -14,12 +14,12 @@ import java.util.logging.Logger;
 import model.Customers;
 
 
-public class SearchQuery {
+public class CustomerSearchQuery {
     
     private Connection conn;
     private ResultSet results;
     
-    public SearchQuery() {
+    public CustomerSearchQuery() {
         
         Properties props = new Properties();
         InputStream instr = getClass().getResourceAsStream("dbConn.properties");
@@ -27,12 +27,12 @@ public class SearchQuery {
         try {
             props.load(instr);
         } catch (IOException ex) {
-            Logger.getLogger(SearchQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerSearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             instr.close();
         } catch (IOException ex) {
-            Logger.getLogger(SearchQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerSearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         String driver = props.getProperty("driver.name");
@@ -42,32 +42,33 @@ public class SearchQuery {
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SearchQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerSearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             conn = DriverManager.getConnection(url, username, passwd);
         } catch (SQLException ex) {
-            Logger.getLogger(SearchQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerSearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void doSearch(String firstName){
+    public void doSearchCUS(String name){
         
         try {
-            String query = "SELECT * FROM customers WHERE UPPER (firstName) LIKE ? ORDER BY custID";
+            String query = "SELECT * FROM customers WHERE UPPER (firstName) LIKE ? OR UPPER (lastName) LIKE ? ORDER BY custID";
             
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, "%" + firstName.toUpperCase() + "%");
+            ps.setString(1, "%" + name.toUpperCase() + "%");
+            ps.setString(2, "%" + name.toUpperCase() + "%");
             this.results = ps.executeQuery();
         } catch (SQLException ex) {
-            Logger.getLogger(SearchQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerSearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
     }
 
     
-    public String getHTMLtable(){
+    public String getHTMLTableCUS(){
         
         String table = "";
         table += "<table class=\"read\">";
@@ -82,14 +83,14 @@ public class SearchQuery {
             table += "<th>State</th>";
             table += "<th>Zip Code</th>";
             table += "<th>Email</th>";
-            table += "<th>Change / Remove</th>";
+            
         table += "</tr>";
         
         try {
             while(this.results.next()){
                 
                 Customers customer = new Customers();
-                customer.setCustID(this.results.getInt("gameID"));
+                customer.setCustID(this.results.getInt("custID"));
                 customer.setFirstName(this.results.getString("firstName"));
                 customer.setLastName(this.results.getString("lastName"));
                 customer.setAddr1(this.results.getString("addr1"));
@@ -137,14 +138,12 @@ public class SearchQuery {
                 table += customer.getEmailAddr();
                 table += "</td>";
 
-                table += "<td>";
-                table += "<a href=update?custID=" + customer.getCustID() + "> Update </a>" + "<a href=delete?custID=" + customer.getCustID() + "> / Delete </a>";
-                table += "</td>";      
+                    
                 
                 table += "</tr>";  
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerSearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         table += "</table";

@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controller;
 
-import dbHelpers.ReadRecord;
+
+import dbHelpers.ReadupdateQuery;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -14,14 +11,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Customers;
 
 /**
  *
  * @author Rossifer
  */
-@WebServlet(name = "UpdateFormServlet", urlPatterns = {"/update"})
-public class UpdateFormServlet extends HttpServlet {
+@WebServlet(name = "ReadupdateServlet", urlPatterns = {"/readupdate"})
+public class ReadupdateServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +36,10 @@ public class UpdateFormServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdateFormServlet</title>");            
+            out.println("<title>Servlet Read</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UpdateFormServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Read at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -76,20 +72,17 @@ public class UpdateFormServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        int custID = Integer.parseInt(request.getParameter("custID"));
-        ReadRecord rr = new ReadRecord(custID);
-        
-        rr.doRead();
-        Customers customer = rr.getCustomer();
-        
-        request.setAttribute("customer", customer);
-        
-        String url = "/updateForm.jsp";
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-        dispatcher.forward(request, response);
-        
-        
+                ReadupdateQuery ruq = new ReadupdateQuery();
+                ruq.doRead();
+                
+                String table = ruq.getHTMLtable();
+                
+                request.setAttribute("table", table);
+                String url = "/read.jsp";
+                
+                RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+                dispatcher.forward(request, response);
+                
     }
 
     /**

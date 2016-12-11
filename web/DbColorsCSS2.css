@@ -3,15 +3,16 @@
 .wrap {text-align:center; width:90%; margin: 0 auto; border: 1px solid white; margin-top:25;}
 
 /*header format*/
-.header { background-color: green; color:white; text-align:left; padding:25px; }
+.header { background-color: lightskyblue; color:white; text-align:left; padding:25px; }
 .headerImg { float:left; height: 70px; width:225px;}
 .headerText { float: left; height: 70px; padding-top:50px; padding-left:25px; }
 
+
 /*main format*/
-.main { background-color:black; color:white; text-align:left; padding:25px; }
+.main { background-color:lightskyblue; color:darkblue; text-align:left; padding:25px; }
 
 /*footer format*/
-.footer { background-color: green; color:white; text-align:left; padding:25px; }
+.footer { background-color: lightskyblue; color:white; text-align:left; padding:25px; }
 
 
 
@@ -71,7 +72,7 @@ float: left;
 .read th{
     height: 50px;
     text-align: left;
-    background-color:green;
+    background-color:darkslategray;
     color:white;
 
 }
@@ -100,3 +101,8 @@ input[readonly] {background-color: gray;}
 
 .add td {border: none; height: 25px; padding: 10px; font-weight: bold;}
 
+
+.searchBar {
+    float: right;
+    
+}
