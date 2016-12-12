@@ -1,7 +1,7 @@
 <div class="header"> <!--header div-->
 
     <div class="headerImg">
-        <img src="" height="120px" />
+        <img src="includes/customer-clipart.png" height="120px" />
     </div>
 
     <div class="headerText">

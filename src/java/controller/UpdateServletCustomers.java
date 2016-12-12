@@ -1,6 +1,6 @@
 package controller;
 
-import dbHelpers.UpdateQueryCUS;
+import dbHelpers.UpdateCustomerQuery;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -71,6 +71,7 @@ public class UpdateServletCustomers extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+            int custID = Integer.parseInt(request.getParameter("id"));
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
             String addr1 = request.getParameter("addr1");
@@ -81,6 +82,7 @@ public class UpdateServletCustomers extends HttpServlet {
             String emailAddr = request.getParameter("emailAddr");
             
             Customers customer = new Customers();
+            customer.setCustID(custID);
             customer.setFirstName(firstName);
             customer.setLastName(lastName);
             customer.setAddr1(addr1);
@@ -90,10 +92,10 @@ public class UpdateServletCustomers extends HttpServlet {
             customer.setZip(zip);
             customer.setEmailAddr(emailAddr);
             
-        UpdateQueryCUS uqc = new UpdateQueryCUS();
-        uqc.doUpdate(customer);
+        UpdateCustomerQuery ucq = new UpdateCustomerQuery();
+        ucq.doUpdate(customer);
         
-        String url = "/read";
+        String url = "/readupdate";
         
         RequestDispatcher dispatcher = request.getRequestDispatcher(url);
         dispatcher.forward(request, response);
